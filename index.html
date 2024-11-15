@@ -64,12 +64,20 @@
     }
 
     #x-logo {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      z-index: 2;
-      /* Ensure it's above other elements */
-    }
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 2; 
+  
+    border: 2px solid #000; 
+    padding: 10px; 
+    transition: transform 0.2s ease; 
+  }
+
+  #x-logo:hover {
+    transform: scale(1.1);
+    
+  }
   </style>
 </head>
 
@@ -92,7 +100,7 @@
   </div>
 
   <a id="x-logo" href="https://twitter.com/StoneTomb1" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/X_logo_black.svg/800px-X_logo_black.svg.png" alt="X.com logo" width="50" height="50"> 
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/X_logo_2023.svg/100px-X_logo_2023.svg.png" alt="X.com logo" width="50" height="50"> 
   </a>
 
   <script>
