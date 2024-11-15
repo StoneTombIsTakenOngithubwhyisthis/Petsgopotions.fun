@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pets GO Potion Crafter</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <style>
+    body {
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background-color:   
+ #000000;
+      
+      margin: 0;
+      position: relative;
+     
+    }
+
+    body::before {
+      content: "";
+      background-image: url('potioncrafter.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      opacity: 0.7;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    h1 {
+      color: #3498db;
+    }
+
+    #container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      z-index: 1;
+      /* Ensure container is above the background */
+    }
+
+    select,
+    input {
+      margin-bottom: 15px;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-family: 'Fredoka One';
+    }
+
+    #ingredients-list {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+      font-family: 'Fredoka One';
+    }
+
+    html{
+        font-family: 'Fredoka One';
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Pets GO Potion Calculator</h1>
+
+  <div id="container">
+    <div>
+      <label for="potion-select">Select Potion:</label>
+      <select id="potion-select"></select>
+    </div>
+
+    <div>
+      <label for="potion-amount">Amount:</label>
+      <input type="number" id="potion-amount" value="1" min="1">
+    </div>
+
+    <h2>Required Ingredients:</h2>
+    <ul id="ingredients-list"></ul>
+  </div>
+
+  <script>
+    const potions = {
+      "Rainbow Dice": {
+        "Lucky 4": 2,
+        "Rainbow Fruit": 4,
+      },
+      "Blazing Dice": {
+        "Lucky 5": 2,
+        "Shiny Rainbow Fruit": 1,
+      },
+      "Insta-Luck 1": {
+        "Lucky 5": 2,
+        "Rainbow Dice Potion": 2,
+        "Golden Dice Potion": 3,
+      },
+      "Insta-Luck 2": {
+        "Insta-Luck 1": 3,
+        "Rainbow Dice Potion": 2,
+      },
+      "Insta-Luck 3": {
+        "Insta-Luck 2": 3,
+        "Rainbow Dice Potion": 2,
+      },
+      "Insta-Luck 4": {
+        "Insta-Luck 3": 10,
+        "Blazing Dice Potion": 5,
+        "The Cocktail": 3,
+      },
+      "The Cocktail": {
+        "Insta-Luck 3": 3,
+        "Lucky 5": 5,
+        "Golden Dice Potion": 8,
+        "Rainbow Dice Potion": 5,
+      },
+    };
+
+    const potionSelect = document.getElementById('potion-select');
+    const potionAmount = document.getElementById('potion-amount');
+    const ingredientsList = document.getElementById('ingredients-list');
+
+    // Populate the potion list
+    for (const potionName in potions) {
+      const option = document.createElement('option');
+      option.value = potionName;
+      option.textContent = potionName;
+      potionSelect.appendChild(option);
+    }
+
+    // Calculate and display ingredients
+    function calculateIngredients() {
+      const selectedPotion = potionSelect.value;
+      const amount = parseInt(potionAmount.value);
+
+      ingredientsList.innerHTML = ''; // Clear previous ingredients
+
+      for (const item in potions[selectedPotion]) {
+        const amountPerPotion = potions[selectedPotion][item];
+        const listItem = document.createElement('li');
+        listItem.textContent = `${item}: ${amountPerPotion * amount}`;
+        ingredientsList.appendChild(listItem);
+      }
+    }
+
+    potionSelect.addEventListener('change', calculateIngredients);
+    potionAmount.addEventListener('change', calculateIngredients);
+
+    calculateIngredients();
+  </script>
+</body>
+</html>
